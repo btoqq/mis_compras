@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Mis Compras</string>
+    <string name="title_activity_main">Mis Compras</string>
+    <string name="package_name">com.miscompras.app</string>
+    <string name="custom_url_scheme">com.miscompras.app</string>
+</resources>
