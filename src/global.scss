@@ -35,3 +35,119 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 /* @import '@ionic/angular/css/palettes/dark.system.css'; */
+
+.moverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,40,120,.45);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.modal {
+  background: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 20px 18px 30px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.mhandle {
+  width: 40px;
+  height: 4px;
+  background: #D3D1C7;
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+
+.mtitle {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a3a6b;
+  margin-bottom: 14px;
+}
+
+.clbl {
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin: 14px 0 8px 2px;
+}
+
+.mgrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.mc {
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1.5px solid #dae8f7;
+  font-size: 13px;
+  color: #1a3a6b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+
+  &.sel { background: #1a5fc8; color: #fff; border-color: #1a5fc8; }
+  &.ya { opacity: 0.4; cursor: not-allowed; }
+}
+
+.mfoot {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+  padding-top: 6px;
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+}
+
+.mbtn {
+  flex: 1;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+
+  &.x { background: #F1EFE8; color: #5F5E5A; }
+  &.ok { background: #1a5fc8; color: #fff; }
+}
+
+.fab-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 10px 14px 20px;
+  background: linear-gradient(transparent, #EAF2FB 40%);
+  z-index: 50;
+}
+
+.fab {
+  background: #1a5fc8;
+  color: #fff;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-shadow: 0 4px 16px rgba(26,95,200,.3);
+}

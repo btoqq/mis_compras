@@ -1,4 +1,8 @@
-import { bootstrapApplication } from '@angular/platform-browser';
+import { importProvidersFrom } from '@angular/core';
+import { IonicStorageModule } from '@ionic/storage-angular';
+import { Drivers } from '@ionic/storage';
+import { provideHttpClient } from '@angular/common/http';
+import { bootstrapApplication, } from '@angular/platform-browser';
 import { RouteReuseStrategy, provideRouter, withPreloading, PreloadAllModules } from '@angular/router';
 import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalone';
 
@@ -10,5 +14,14 @@ bootstrapApplication(AppComponent, {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
+    provideHttpClient(),
+    // --- AGREGA ESTO AQUÍ ---
+    importProvidersFrom(
+      IonicStorageModule.forRoot({
+        name: '__miscompras_db',
+        driverOrder: [Drivers.IndexedDB, Drivers.LocalStorage]
+      })
+    )
+    // ------------------------
   ],
 });

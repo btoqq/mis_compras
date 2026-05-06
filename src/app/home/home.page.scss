@@ -1,27 +1,329 @@
-#container {
-  text-align: center;
+// Fondo general de la app
+ion-content {
+  --background: #EAF2FB;
+}
 
+// ── HEADER ──────────────────────────────────────────────────
+.hdr {
+  background: #1a5fc8;
+  padding: 14px 18px 0;
+}
+
+.hdr-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+}
+
+.htitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+// Caja blanca donde va el logo SVG
+.logo-box {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appname {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+// Contador de items en el header
+.counter {
+  background: rgba(255,255,255,.2);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 20px;
+}
+
+// Onda decorativa debajo del header
+.wave-wrap {
+  height: 24px;
+  overflow: hidden;
+  svg { display: block; width: 100%; height: 24px; }
+}
+
+// ── BÚSQUEDA ────────────────────────────────────────────────
+.sbar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border-radius: 12px;
+  margin: 10px 14px 4px;
+  padding: 10px 14px;
+  border: 1.5px solid #dae8f7;
+
+  input {
+    border: none;
+    outline: none;
+    color: #1a3a6b;
+    font-size: 15px;
+    flex: 1;
+    background: transparent;
+    &::placeholder { color: #B5D4F4; }
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: #B5D4F4;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}
+
+// ── CHIPS DE FILTRO ─────────────────────────────────────────
+.chips {
+  display: flex;
+  gap: 8px;
+  padding: 6px 14px 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+.chip {
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid #B5D4F4;
+  background: #fff;
+  color: #1a5fc8;
+  white-space: nowrap;
+  cursor: pointer;
+
+  // Chip activo
+  &.on {
+    background: #1a5fc8;
+    color: #fff;
+    border-color: #1a5fc8;
+  }
+}
+
+// ── LISTA ───────────────────────────────────────────────────
+.lst {
+  padding: 4px 14px 100px;
+}
+
+.lst-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 4px;
+}
+
+// Mensaje lista vacía
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #B4B2A9;
+  font-size: 15px;
+  line-height: 1.8;
+}
+
+// ── TARJETA DE PRODUCTO ─────────────────────────────────────
+.card {
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #dae8f7;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0 14px 14px;
+  position: relative;
+  overflow: hidden;
+
+  // Tarjeta importante - borde naranja
+  &.imp { border-color: #F5A623; }
+
+  // Tarjeta en carrito - fondo gris claro
+  &.done { background: #f2f7fd; border-color: #B5D4F4; }
+}
+
+// Badge naranja "★ Importante"
+.imp-badge {
   position: absolute;
-  left: 0;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  background: #F5A623;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 7px 12px 7px 10px;
+  border-radius: 20px 0 0 20px;
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+// Checkbox circular
+.chk {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #B5D4F4;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+
+  // Checkbox marcado - azul
+  &.on { background: #1a5fc8; border-color: #1a5fc8; }
 }
 
-#container p {
+// Emoji de categoría
+.ico {
+  font-size: 32px;
+  width: 38px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+// Nombre y tags del producto
+.inf { flex: 1; min-width: 0; padding-right: 4px; }
+
+.nm {
   font-size: 16px;
-  line-height: 22px;
+  font-weight: 600;
+  color: #1a3a6b;
+  margin-bottom: 6px;
 
-  color: #8c8c8c;
-
-  margin: 0;
+  // Nombre tachado cuando está en carrito
+  &.done { text-decoration: line-through; color: #B4B2A9; font-weight: 400; }
 }
 
-#container a {
-  text-decoration: none;
+.tags {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-wrap: wrap;
 }
+
+// Tag de categoría
+.cat-tag {
+  background: #EAF2FB;
+  color: #1a5fc8;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+// Tag de cantidad - toque abre editor
+.qty-tag {
+  background: #fff;
+  color: #1a5fc8;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 2px solid #1a5fc8;
+  cursor: pointer;
+
+  &.imp { background: #FFF3DC; color: #C47800; border-color: #F5A623; }
+  &.done { border-color: #B5D4F4; color: #B4B2A9; }
+}
+
+// Editor inline de cantidad
+.edit-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.qinp {
+  width: 56px;
+  padding: 5px 8px;
+  border-radius: 20px;
+  border: 2px solid #1a5fc8;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a5fc8;
+  text-align: center;
+  outline: none;
+}
+
+.usel {
+  padding: 5px 10px;
+  border-radius: 20px;
+  border: 2px solid #1a5fc8;
+  font-size: 14px;
+  color: #1a5fc8;
+  background: #fff;
+  outline: none;
+  cursor: pointer;
+}
+
+.ebtn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.save { background: #1a5fc8; }
+  &.cancel { background: #F1EFE8; color: #888; font-size: 14px; }
+}
+
+// Columna derecha: estrella y eliminar
+.card-right {
+  width: 46px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.star-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #D3D1C7;
+
+  &.on { color: #F5A623; }
+}
+
+.del-btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #FEE8E8;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ── BOTÓN FLOTANTE ──────────────────────────────────────────
+.fab-wrap {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 14px 20px;
+  background: linear-gradient(transparent, #EAF2FB 40%);
+  z-index: 50;
+} 

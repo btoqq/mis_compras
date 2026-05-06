@@ -1,0 +1,19 @@
+{
+  "categorias": [
+    {"id":"lacteos","n":"Lácteos","e":"🥛","productos":["Leche entera","Leche descremada","Leche semidescremada","Leche en polvo","Leche de soya","Queso amarillo","Queso blanco","Queso mozzarella","Mantequilla","Crema de leche","Natilla","Yogur natural","Yogur de fresa","Yogur de vainilla"]},
+    {"id":"huevos","n":"Huevos","e":"🥚","productos":["Huevos de gallina","Huevos de codorniz"]},
+    {"id":"panaderia","n":"Panadería","e":"🍞","productos":["Pan blanco","Pan integral","Pan de caja","Tortillas","Galletas","Biscochos"]},
+    {"id":"carnes","n":"Carnes","e":"🥩","productos":["Pollo entero","Pechuga de pollo","Muslos de pollo","Carne molida","Bistec de res","Costillas de cerdo","Chuleta de cerdo","Salchicha","Jamón","Tocino","Chorizo","Atún en lata","Sardinas"]},
+    {"id":"frutas","n":"Frutas","e":"🍎","productos":["Manzana","Banano","Naranja","Mandarina","Piña","Sandía","Melón","Uvas","Fresas","Mango","Papaya","Pera","Limón"]},
+    {"id":"verduras","n":"Verduras","e":"🥦","productos":["Tomate","Cebolla","Papa","Zanahoria","Lechuga","Brócoli","Pepino","Chile dulce","Ajo","Apio","Espinaca","Remolacha","Aguacate"]},
+    {"id":"abarrotes","n":"Abarrotes","e":"🛒","productos":["Arroz","Frijoles","Azúcar","Sal","Aceite","Harina","Pasta","Lentejas","Avena","Maíz","Vinagre","Salsa de tomate","Mayonesa","Mostaza"]},
+    {"id":"limpieza","n":"Limpieza","e":"🧹","productos":["Detergente en polvo","Detergente líquido","Suavizante","Cloro","Limpiapisos","Jabón de trastos","Esponja","Escoba","Trapeador","Bolsas de basura","Desinfectante","Papel higiénico","Servilletas","Papel toalla"]},
+    {"id":"cuidado","n":"Cuidado personal","e":"🧴","productos":["Shampoo","Acondicionador","Jabón de baño","Pasta de dientes","Cepillo de dientes","Desodorante","Rastrillos","Crema corporal","Protector solar"]},
+    {"id":"bebidas","n":"Bebidas","e":"🥤","productos":["Agua","Jugo de naranja","Jugo de piña","Refresco cola","Refresco de uva","Té","Café molido","Café instantáneo","Chocolate en polvo"]},
+    {"id":"mascotas","n":"Mascotas","e":"🐾","productos":["Concentrado perro","Concentrado gato","Arena para gato","Snacks para perro","Snacks para gato"]},
+    {"id":"congelados","n":"Congelados","e":"🧊","productos":["Helado de vainilla","Helado de chocolate","Pizza congelada","Nuggets","Papas fritas congeladas","Vegetales congelados"]},
+    {"id":"snacks","n":"Snacks","e":"🍿","productos":["Papas fritas","Palomitas","Galletas dulces","Galletas saladas","Chocolates","Chicles","Gomitas"]},
+    {"id":"lacteos2","n":"Lácteos adicionales","e":"🧀","productos":["Queso crema","Queso parmesano","Leche condensada","Dulce de leche"]},
+    {"id":"farmacia","n":"Farmacia básica","e":"💊","productos":["Acetaminofén","Ibuprofeno","Antigripal","Vitamina C","Alcohol","Curitas","Algodón"]}
+  ]
+}
