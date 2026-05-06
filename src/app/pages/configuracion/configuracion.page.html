@@ -1,13 +1,84 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>configuracion</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">configuracion</ion-title>
-    </ion-toolbar>
-  </ion-header>
+
+  <!-- Header azul igual al de home -->
+  <div class="hdr">
+    <div class="hdr-top">
+      <div class="htitle">
+        <div class="logo-box">
+          <svg width="26" height="22" viewBox="0 0 40 35" fill="none">
+            <path d="M2 2h5l2.5 14h20l3-9H10" stroke="#1a5fc8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 7h18" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M11 10.5h15" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M12.5 14h11" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="14" cy="30" r="2.8" stroke="#1a5fc8" stroke-width="2.2"/>
+            <circle cx="26" cy="30" r="2.8" stroke="#1a5fc8" stroke-width="2.2"/>
+          </svg>
+        </div>
+        <span class="appname">Configuración</span>
+      </div>
+    </div>
+    <!-- Onda decorativa -->
+    <div class="wave-wrap">
+      <svg viewBox="0 0 480 24" preserveAspectRatio="none">
+        <path d="M0 0 L480 0 L480 8 Q360 26 240 18 Q120 10 0 22 Z" fill="#1a5fc8"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="cfg-body">
+
+    <!-- SECCIÓN: Cuenta Google -->
+    <div class="seccion">
+      <div class="sec-titulo">Cuenta Google</div>
+
+      <!-- Si NO está logueado -->
+      <div *ngIf="!usuarioLogueado" class="google-card">
+        <div class="google-info">
+          <div class="google-icono">☁️</div>
+          <div>
+            <div class="google-titulo">Respaldar mi lista</div>
+            <div class="google-sub">Inicia sesión para sincronizar entre dispositivos y no perder tu lista</div>
+          </div>
+        </div>
+        <button class="btn-google" (click)="loginGoogle()">
+          <span class="google-logo">G</span>
+          Continuar con Google
+        </button>
+      </div>
+
+      <!-- Si SÍ está logueado -->
+      <div *ngIf="usuarioLogueado" class="google-card logueado">
+        <div class="google-info">
+          <div class="avatar">{{ usuario.nombre.charAt(0) }}</div>
+          <div>
+            <div class="google-titulo">{{ usuario.nombre }}</div>
+            <div class="google-sub">{{ usuario.email }}</div>
+          </div>
+        </div>
+        <div class="sync-estado">✅ Lista sincronizada</div>
+        <button class="btn-salir" (click)="cerrarSesion()">Cerrar sesión</button>
+      </div>
+    </div>
+
+    <!-- SECCIÓN: Información de la app -->
+    <div class="seccion">
+      <div class="sec-titulo">Acerca de</div>
+      <div class="info-card">
+        <div class="info-row">
+          <span class="info-label">Versión</span>
+          <span class="info-val">1.0.0</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Modo</span>
+          <span class="info-val">Sin internet ✅</span>
+        </div>
+        <div class="info-row">
+          <span class="info-label">Productos disponibles</span>
+          <span class="info-val">150+</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </ion-content>

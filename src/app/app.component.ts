@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
+import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
 import { cartOutline, settingsOutline } from 'ionicons/icons';
 
@@ -7,11 +8,10 @@ import { cartOutline, settingsOutline } from 'ionicons/icons';
   selector: 'app-root',
   templateUrl: 'app.component.html',
   standalone: true,
-  imports: [IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel],
+  imports: [IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel, RouterModule],
 })
 export class AppComponent {
   constructor() {
-    // Registra los iconos que usamos en la barra de navegación
     addIcons({ cartOutline, settingsOutline });
   }
 }

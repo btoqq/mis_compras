@@ -1,0 +1,201 @@
+// Fondo general igual al home
+ion-content {
+  --background: #EAF2FB;
+}
+
+// ── HEADER ──────────────────────────────────────────────────
+.hdr {
+  background: #1a5fc8;
+  padding: 14px 18px 0;
+}
+
+.hdr-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+}
+
+.htitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-box {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appname {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.wave-wrap {
+  height: 24px;
+  overflow: hidden;
+  svg { display: block; width: 100%; height: 24px; }
+}
+
+// ── CUERPO ───────────────────────────────────────────────────
+.cfg-body {
+  padding: 16px 14px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+// ── SECCIONES ────────────────────────────────────────────────
+.seccion {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+// Título de cada sección
+.sec-titulo {
+  font-size: 11px;
+  font-weight: 700;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: .6px;
+  margin-left: 2px;
+}
+
+// ── TARJETA GOOGLE ───────────────────────────────────────────
+.google-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #dae8f7;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  // Cuando está logueado borde verde
+  &.logueado { border-color: #4CAF50; }
+}
+
+.google-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+// Ícono de nube cuando no está logueado
+.google-icono {
+  font-size: 32px;
+  width: 44px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+// Avatar con inicial del nombre cuando está logueado
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #1a5fc8;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.google-titulo {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a3a6b;
+  margin-bottom: 3px;
+}
+
+.google-sub {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.4;
+}
+
+// Botón de login con Google
+.btn-google {
+  background: #fff;
+  border: 2px solid #dae8f7;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a3a6b;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+
+  // Logo G de Google
+  .google-logo {
+    font-size: 18px;
+    font-weight: 800;
+    color: #1a5fc8;
+  }
+}
+
+// Estado de sincronización
+.sync-estado {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4CAF50;
+  text-align: center;
+}
+
+// Botón cerrar sesión
+.btn-salir {
+  background: #FEE8E8;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #E24B4A;
+  cursor: pointer;
+  width: 100%;
+}
+
+// ── TARJETA INFO ─────────────────────────────────────────────
+.info-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #dae8f7;
+  overflow: hidden;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid #f0f5fb;
+
+  &:last-child { border-bottom: none; }
+}
+
+.info-label {
+  font-size: 14px;
+  color: #1a3a6b;
+  font-weight: 500;
+}
+
+.info-val {
+  font-size: 14px;
+  color: #888;
+  font-weight: 600;
+}

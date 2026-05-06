@@ -1,17 +1,14 @@
 <ion-app>
   <ion-router-outlet></ion-router-outlet>
 
-  <!-- Barra de navegación inferior fija -->
   <ion-tab-bar slot="bottom" style="position:fixed; bottom:0; left:0; right:0; z-index:999;">
 
-    <!-- Home - Lista de compras -->
-    <ion-tab-button tab="home" href="/home">
+    <ion-tab-button tab="home" routerLink="/home">
       <ion-icon name="cart-outline"></ion-icon>
       <ion-label>Mi Lista</ion-label>
     </ion-tab-button>
 
-    <!-- Configuración -->
-    <ion-tab-button tab="configuracion" href="/configuracion">
+    <ion-tab-button tab="configuracion" routerLink="/configuracion">
       <ion-icon name="settings-outline"></ion-icon>
       <ion-label>Configuración</ion-label>
     </ion-tab-button>
