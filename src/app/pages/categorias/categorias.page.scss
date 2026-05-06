@@ -1,0 +1,195 @@
+// Fondo general
+ion-content {
+  --background: #EAF2FB;
+}
+
+// ── HEADER ──────────────────────────────────────────────────
+.hdr {
+  background: #1a5fc8;
+  padding: 14px 18px 0;
+}
+
+.hdr-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 14px;
+}
+
+.htitle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-box {
+  width: 36px;
+  height: 36px;
+  background: #fff;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appname {
+  color: #fff;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+.wave-wrap {
+  height: 24px;
+  overflow: hidden;
+  svg { display: block; width: 100%; height: 24px; }
+}
+
+// ── GRID DE CATEGORÍAS ───────────────────────────────────────
+.cat-body {
+  padding: 16px 14px 100px;
+}
+
+.cat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+// Tarjeta de cada categoría
+.cat-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 2px solid #dae8f7;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  text-align: center;
+  transition: border-color .15s;
+
+  &:active { border-color: #1a5fc8; background: #f0f7ff; }
+}
+
+.cat-emoji {
+  font-size: 36px;
+  line-height: 1;
+}
+
+.cat-nombre {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a3a6b;
+}
+
+.cat-count {
+  font-size: 11px;
+  color: #888;
+  font-weight: 500;
+}
+
+// ── VISTA DE PRODUCTOS ───────────────────────────────────────
+.prod-body {
+  padding: 16px 14px 100px;
+}
+
+// Header con botón volver y título de categoría
+.prod-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.btn-volver {
+  background: #fff;
+  border: 2px solid #dae8f7;
+  border-radius: 12px;
+  padding: 8px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1a5fc8;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.prod-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a3a6b;
+}
+
+// Lista de productos
+.prod-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+// Item de producto
+.prod-item {
+  background: #fff;
+  border-radius: 14px;
+  border: 2px solid #dae8f7;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  transition: border-color .15s;
+
+  // Producto ya en lista - opaco y no clickeable
+  &.ya {
+    opacity: 0.5;
+    cursor: default;
+    background: #f2f7fd;
+  }
+}
+
+.prod-emoji {
+  font-size: 28px;
+  width: 36px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.prod-nombre {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a3a6b;
+}
+
+// Botón agregar
+.btn-add {
+  width: 28px;
+  height: 28px;
+  background: #1a5fc8;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+// Check cuando ya está en lista
+.btn-ya {
+  width: 28px;
+  height: 28px;
+  background: #4CAF50;
+  color: #fff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  flex-shrink: 0;
+}

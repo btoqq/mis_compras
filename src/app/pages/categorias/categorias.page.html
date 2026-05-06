@@ -1,0 +1,70 @@
+<ion-content [fullscreen]="true">
+
+  <!-- Header azul igual al resto de pantallas -->
+  <div class="hdr">
+    <div class="hdr-top">
+      <div class="htitle">
+        <div class="logo-box">
+          <svg width="26" height="22" viewBox="0 0 40 35" fill="none">
+            <path d="M2 2h5l2.5 14h20l3-9H10" stroke="#1a5fc8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M10 7h18" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M11 10.5h15" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M12.5 14h11" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+            <circle cx="14" cy="30" r="2.8" stroke="#1a5fc8" stroke-width="2.2"/>
+            <circle cx="26" cy="30" r="2.8" stroke="#1a5fc8" stroke-width="2.2"/>
+          </svg>
+        </div>
+        <span class="appname">Categorías</span>
+      </div>
+    </div>
+    <div class="wave-wrap">
+      <svg viewBox="0 0 480 24" preserveAspectRatio="none">
+        <path d="M0 0 L480 0 L480 8 Q360 26 240 18 Q120 10 0 22 Z" fill="#1a5fc8"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Vista principal: grid de categorías -->
+  <div class="cat-body" *ngIf="!categoriaAbierta">
+    <div class="cat-grid">
+      <div *ngFor="let cat of categorias"
+           class="cat-card"
+           (click)="toggleCategoria(cat)">
+        <div class="cat-emoji">{{ cat.e }}</div>
+        <div class="cat-nombre">{{ cat.n }}</div>
+        <div class="cat-count">{{ cat.productos.length }} productos</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vista de productos de una categoría -->
+  <div class="prod-body" *ngIf="categoriaAbierta">
+
+    <!-- Header de la categoría abierta -->
+    <div class="prod-header">
+      <button class="btn-volver" (click)="cerrarCategoria()">
+        ← Volver
+      </button>
+      <div class="prod-titulo">
+        <span>{{ categoriaAbierta.e }}</span>
+        <span>{{ categoriaAbierta.n }}</span>
+      </div>
+    </div>
+
+    <!-- Lista de productos -->
+    <div class="prod-lista">
+      <div *ngFor="let prod of categoriaAbierta.productos"
+           class="prod-item"
+           [class.ya]="yaEnLista(prod)"
+           (click)="agregarProducto(prod, categoriaAbierta.id)">
+        <div class="prod-emoji">{{ categoriaAbierta.e }}</div>
+        <div class="prod-nombre">{{ prod }}</div>
+        <div class="prod-accion">
+          <span *ngIf="!yaEnLista(prod)" class="btn-add">＋</span>
+          <span *ngIf="yaEnLista(prod)" class="btn-ya">✓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

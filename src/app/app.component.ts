@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet, IonTabBar, IonTabButton, IonIcon, IonLabel } from '@ionic/angular/standalone';
 import { RouterModule } from '@angular/router';
 import { addIcons } from 'ionicons';
-import { cartOutline, settingsOutline } from 'ionicons/icons';
+import { cartOutline, settingsOutline, gridOutline } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -12,6 +12,6 @@ import { cartOutline, settingsOutline } from 'ionicons/icons';
 })
 export class AppComponent {
   constructor() {
-    addIcons({ cartOutline, settingsOutline });
+    addIcons({ cartOutline, settingsOutline, gridOutline });
   }
 }

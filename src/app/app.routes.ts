@@ -20,7 +20,7 @@ export const routes: Routes = [
   },
   {
     path: 'categorias',
-    loadComponent: () => import('./pages/categoria/categoria.page').then( m => m.CategoriaPage)
+    loadComponent: () => import('./pages/categorias/categorias.page').then( m => m.CategoriasPage)
   },
   {
     path: 'configuracion',
