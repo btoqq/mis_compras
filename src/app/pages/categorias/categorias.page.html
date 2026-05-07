@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
 
-  <!-- Header azul igual al resto de pantallas -->
+  <!-- Header azul -->
   <div class="hdr">
     <div class="hdr-top">
       <div class="htitle">
@@ -40,11 +40,9 @@
   <!-- Vista de productos de una categoría -->
   <div class="prod-body" *ngIf="categoriaAbierta">
 
-    <!-- Header de la categoría abierta -->
+    <!-- Header con botón volver -->
     <div class="prod-header">
-      <button class="btn-volver" (click)="cerrarCategoria()">
-        ← Volver
-      </button>
+      <button class="btn-volver" (click)="cerrarCategoria()">← Volver</button>
       <div class="prod-titulo">
         <span>{{ categoriaAbierta.e }}</span>
         <span>{{ categoriaAbierta.n }}</span>
@@ -57,7 +55,7 @@
            class="prod-item"
            [class.ya]="yaEnLista(prod)"
            (click)="agregarProducto(prod, categoriaAbierta.id)">
-        <div class="prod-emoji">{{ categoriaAbierta.e }}</div>
+        <div class="prod-emoji">{{ getEmojiProducto(prod) }}</div>
         <div class="prod-nombre">{{ prod }}</div>
         <div class="prod-accion">
           <span *ngIf="!yaEnLista(prod)" class="btn-add">＋</span>
@@ -65,6 +63,7 @@
         </div>
       </div>
     </div>
+
   </div>
 
 </ion-content>
