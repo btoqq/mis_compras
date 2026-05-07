@@ -40,16 +40,17 @@
   position: fixed;
   inset: 0;
   background: rgba(10,40,120,.45);
-  z-index: 100;
+  z-index: 1000;
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  padding-bottom: 56px;
 }
 
 .modal {
   background: #fff;
   border-radius: 24px 24px 0 0;
-  padding: 20px 18px 30px;
+  padding: 20px 18px 20px;
   width: 100%;
   max-height: 80vh;
   overflow-y: auto;
@@ -105,10 +106,15 @@
   display: flex;
   gap: 10px;
   margin-top: 16px;
-  padding-top: 6px;
+  padding: 12px, 18px, 70px;
   position: sticky;
   bottom: 0;
-  background: #fff;
+  left: 0;
+  right: 0;
+  background: #b7b9bb;
+  box-shadow: 0 -4px 12px rgba(234,242,251,1);
+  border-top: 1.5px solid #dae8f7; 
+  margin: 0 -18px -20px;
 }
 
 .mbtn {
@@ -126,7 +132,7 @@
 
 .fab-wrap {
   position: fixed;
-  bottom: 80px;
+  bottom: 56px;
   left: 0;
   right: 0;
   width: 100%;

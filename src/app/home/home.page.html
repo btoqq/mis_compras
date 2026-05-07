@@ -1,10 +1,10 @@
 <ion-content [fullscreen]="true">
+
   <!-- Header azul con logo, nombre y contador -->
   <div class="hdr">
     <div class="hdr-top">
       <div class="htitle">
         <div class="logo-box">
-          <!-- Logo SVG del carrito -->
           <svg width="26" height="22" viewBox="0 0 40 35" fill="none">
             <path d="M2 2h5l2.5 14h20l3-9H10" stroke="#1a5fc8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
             <path d="M10 7h18" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
@@ -104,7 +104,7 @@
           </div>
         </div>
 
-        <!-- Botones derecha: estrella e eliminar -->
+        <!-- Botones derecha: estrella y eliminar -->
         <div class="card-right">
           <button class="star-btn" [class.on]="p.imp" (click)="toggleImportante(p.id)">★</button>
           <button class="del-btn" (click)="eliminarProducto(p.id)">
@@ -119,10 +119,6 @@
     </div>
   </div>
 
-  <!-- Botón flotante agregar -->
-  <div class="fab-wrap">
-    <button class="fab" (click)="abrirModal()">＋ Agregar productos</button>
-  </div>
 </ion-content>
 
 <!-- Botón flotante FUERA del ion-content -->
@@ -130,10 +126,7 @@
   <button class="fab" (click)="abrirModal()">＋ Agregar productos</button>
 </div>
 
-<div class="fab-wrap">
-  <button class="fab" (click)="abrirModal()">＋ Agregar productos</button>
-</div>
-
+<!-- Modal de agregar productos -->
 <div class="moverlay" *ngIf="modalAbierto" (click)="cerrarModal()">
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="mhandle"></div>
@@ -147,7 +140,7 @@
                [class.sel]="esPendiente(prod)"
                [class.ya]="yaEnLista(prod)"
                (click)="!yaEnLista(prod) && togglePendiente(prod, cat.id)">
-            <span style="font-size:20px">{{ cat.e }}</span>
+            <span style="font-size:20px">{{ getEmojiModal(prod) }}</span>
             <span>{{ prod }}</span>
           </div>
         </div>
