@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Subscription} from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
@@ -67,7 +68,7 @@ const EMOJIS: { [key: string]: string } = {
     IonicStorageModule    // Componentes de Ionic
   ],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
 
   // ── DATOS DE LA LISTA ──────────────────────────────────────
 
@@ -76,9 +77,45 @@ export class HomePage implements OnInit {
   filtro: string = 'all';          // Filtro activo: all | pend | imp | done
   busqueda: string = '';           // Texto de búsqueda actual
   pendientes: any[] = [];          // Productos seleccionados en el modal antes de confirmar
+  private listaSub: Subscription | undefined;    
 
   // ── MODAL ──────────────────────────────────────────────────
-  modalAbierto: boolean = false;   // Controla si el modal está visible o no
+  modalAbierto: boolean = false; // Controla si el modal está visible o no
+  sugerencias: any[] = []; // Lista de sugerencias al buscar 
+
+  // Busca productos en el catálogo que coincidan con la búsqueda
+buscarSugerencias() {
+  if (!this.busqueda.trim()) { this.sugerencias = []; return; }
+  const q = this.busqueda.toLowerCase();
+  this.sugerencias = [];
+  this.categorias.forEach(cat => {
+    cat.productos.forEach((prod: string) => {
+      if (prod.toLowerCase().includes(q)) {
+        this.sugerencias.push({
+          nombre: prod,
+          catId: cat.id,
+          catNombre: cat.n
+        });
+      }
+    });
+  });
+}
+
+// Agrega un producto directamente desde la búsqueda
+async agregarDesdeBusqueda(s: any) {
+  if (this.yaEnLista(s.nombre)) return;
+  this.items.push({
+    id: this.storageService.generarId(),
+    name: s.nombre,
+    cat: s.catId,
+    checked: false,
+    imp: false,
+    qty: 1,
+    unit: 'und',
+    editing: false
+  });
+  await this.guardar();
+}
 
   constructor(
     private storageService: StorageService,  // Para guardar y cargar la lista
@@ -92,8 +129,14 @@ getEmojiModal(nombre: string): string {
 
   // Se ejecuta automáticamente cuando la página carga
   async ngOnInit() {
-    await this.cargarCatalogo();   // Primero carga los productos del JSON
-    await this.cargarLista();      // Luego carga la lista guardada del usuario
+    await this.cargarCatalogo();    // Primero carga los productos del JSON
+    this.listaSub = this.storageService.lista$.subscribe(items => {
+      this.items = [...items];
+    });     // Luego carga la lista guardada del usuario
+  }
+
+  ngOnDestroy() {
+      this.listaSub?.unsubscribe();
   }
 
   // ── CARGA DE DATOS ──────────────────────────────────────────

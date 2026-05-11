@@ -27,15 +27,33 @@
     </div>
   </div>
 
-  <!-- Barra de búsqueda -->
-  <div class="sbar">
-    <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0">
-      <circle cx="8.5" cy="8.5" r="6" stroke="#B5D4F4" stroke-width="2"/>
-      <line x1="13" y1="13" x2="18" y2="18" stroke="#B5D4F4" stroke-width="2" stroke-linecap="round"/>
-    </svg>
-    <input [(ngModel)]="busqueda" type="text" placeholder="Buscar producto..." autocomplete="off"/>
-    <button *ngIf="busqueda" (click)="limpiarBusqueda()">✕</button>
+  <!-- Barra de búsqueda con sugerencias -->
+<div class="sbar">
+  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0">
+    <circle cx="8.5" cy="8.5" r="6" stroke="#B5D4F4" stroke-width="2"/>
+    <line x1="13" y1="13" x2="18" y2="18" stroke="#B5D4F4" stroke-width="2" stroke-linecap="round"/>
+  </svg><input [(ngModel)]="busqueda" 
+       (ngModelChange)="buscarSugerencias()"
+       type="text" 
+       placeholder="Buscar o agregar producto..." 
+       autocomplete="off"/>
+  
+  <button *ngIf="busqueda" (click)="limpiarBusqueda()">✕</button>
+</div>
+
+<!-- Sugerencias de productos al buscar -->
+<div class="sugerencias" *ngIf="busqueda && sugerencias.length > 0">
+  <div *ngFor="let s of sugerencias"
+       class="sug-item"
+       (click)="agregarDesdeBusqueda(s)">
+    <span class="sug-emoji">{{ getEmojiModal(s.nombre) }}</span>
+    <span class="sug-nombre">{{ s.nombre }}</span>
+    <span class="sug-cat">{{ s.catNombre }}</span>
+    <span *ngIf="!yaEnLista(s.nombre)" class="btn-add">＋</span>
+    <span *ngIf="yaEnLista(s.nombre)" class="btn-ya">✓</span>
   </div>
+</div>
+  
 
   <!-- Chips de filtro -->
   <div class="chips">
@@ -72,7 +90,7 @@
         </div>
 
         <!-- Emoji de categoría -->
-        <div class="ico">{{ getEmoji(p.cat) }}</div>
+        <div class="ico">{{ getEmojiModal (p.name) }}</div>
 
         <!-- Info del producto -->
         <div class="inf">
