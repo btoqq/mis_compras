@@ -1,103 +1,99 @@
 <ion-content [fullscreen]="true">
 
-  <!-- Header azul con logo, nombre y contador -->
-  <div class="hdr" style="padding-top: env(safe-area-inset-top, 20px);">
-    <div class="hdr-top">
-      <div class="htitle">
-        <div class="logo-box">
-          <svg width="26" height="22" viewBox="0 0 40 35" fill="none">
-            <path d="M2 2h5l2.5 14h20l3-9H10" stroke="#1a5fc8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M10 7h18" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M11 10.5h15" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
-            <path d="M12.5 14h11" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
-            <circle cx="14" cy="30" r="2.8" stroke="#1a5fc8" stroke-width="2.2"/>
-            <circle cx="26" cy="30" r="2.8" stroke="#1a5fc8" stroke-width="2.2"/>
-          </svg>
+  <!-- Zona fija: header + búsqueda + chips -->
+  <div class="zona-fija">
+
+    <!-- Header azul con logo, nombre y contador -->
+    <div class="hdr" style="padding-top: env(safe-area-inset-top, 20px);">
+      <div class="hdr-top">
+        <div class="htitle">
+          <div class="logo-box">
+            <svg width="26" height="22" viewBox="0 0 40 35" fill="none">
+              <path d="M2 2h5l2.5 14h20l3-9H10" stroke="#1a5fc8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M10 7h18" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M11 10.5h15" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+              <path d="M12.5 14h11" stroke="#378ADD" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="14" cy="30" r="2.8" stroke="#1a5fc8" stroke-width="2.2"/>
+              <circle cx="26" cy="30" r="2.8" stroke="#1a5fc8" stroke-width="2.2"/>
+            </svg>
+          </div>
+          <span class="appname">Mis Compras</span>
         </div>
-        <span class="appname">Mis Compras</span>
+        <div class="counter">{{ enCarrito }}/{{ totalItems }}</div>
       </div>
-      <!-- Contador de productos en carrito / total -->
-      <div class="counter">{{ enCarrito }}/{{ totalItems }}</div>
+      <div class="wave-wrap">
+        <svg viewBox="0 0 480 24" preserveAspectRatio="none">
+          <path d="M0 0 L480 0 L480 8 Q360 26 240 18 Q120 10 0 22 Z" fill="#1a5fc8"/>
+        </svg>
+      </div>
     </div>
-    <!-- Onda decorativa debajo del header -->
-    <div class="wave-wrap">
-      <svg viewBox="0 0 480 24" preserveAspectRatio="none">
-        <path d="M0 0 L480 0 L480 8 Q360 26 240 18 Q120 10 0 22 Z" fill="#1a5fc8"/>
+
+    <!-- Barra de búsqueda -->
+    <div class="sbar">
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0">
+        <circle cx="8.5" cy="8.5" r="6" stroke="#B5D4F4" stroke-width="2"/>
+        <line x1="13" y1="13" x2="18" y2="18" stroke="#B5D4F4" stroke-width="2" stroke-linecap="round"/>
       </svg>
+      <input [(ngModel)]="busqueda"
+             (ngModelChange)="buscarSugerencias()"
+             type="text"
+             placeholder="Buscar o agregar producto..."
+             autocomplete="off"/>
+      <button *ngIf="busqueda" (click)="limpiarBusqueda()">✕</button>
     </div>
-  </div>
 
-  <!-- Barra de búsqueda con sugerencias -->
-<div class="sbar">
-  <svg width="16" height="16" viewBox="0 0 20 20" fill="none" style="flex-shrink:0">
-    <circle cx="8.5" cy="8.5" r="6" stroke="#B5D4F4" stroke-width="2"/>
-    <line x1="13" y1="13" x2="18" y2="18" stroke="#B5D4F4" stroke-width="2" stroke-linecap="round"/>
-  </svg><input [(ngModel)]="busqueda" 
-       (ngModelChange)="buscarSugerencias()"
-       type="text" 
-       placeholder="Buscar o agregar producto..." 
-       autocomplete="off"/>
-  
-  <button *ngIf="busqueda" (click)="limpiarBusqueda()">✕</button>
-</div>
+    <!-- Sugerencias de productos al buscar -->
+    <div class="sugerencias" *ngIf="busqueda && sugerencias.length > 0">
+      <div *ngFor="let s of sugerencias"
+           class="sug-item"
+           (click)="agregarDesdeBusqueda(s)">
+        <span class="sug-emoji">{{ getEmojiModal(s.nombre) }}</span>
+        <span class="sug-nombre">{{ s.nombre }}</span>
+        <span class="sug-cat">{{ s.catNombre }}</span>
+        <span *ngIf="!yaEnLista(s.nombre)" class="btn-add">＋</span>
+        <span *ngIf="yaEnLista(s.nombre)" class="btn-ya">✓</span>
+      </div>
+    </div>
 
-<!-- Sugerencias de productos al buscar -->
-<div class="sugerencias" *ngIf="busqueda && sugerencias.length > 0">
-  <div *ngFor="let s of sugerencias"
-       class="sug-item"
-       (click)="agregarDesdeBusqueda(s)">
-    <span class="sug-emoji">{{ getEmojiModal(s.nombre) }}</span>
-    <span class="sug-nombre">{{ s.nombre }}</span>
-    <span class="sug-cat">{{ s.catNombre }}</span>
-    <span *ngIf="!yaEnLista(s.nombre)" class="btn-add">＋</span>
-    <span *ngIf="yaEnLista(s.nombre)" class="btn-ya">✓</span>
-  </div>
-</div>
-  
+    <!-- Chips de filtro -->
+    <div class="chips">
+      <button class="chip" [class.on]="filtro === 'all'"  (click)="setFiltro('all')">Todos</button>
+      <button class="chip" [class.on]="filtro === 'pend'" (click)="setFiltro('pend')">Pendientes</button>
+      <button class="chip" [class.on]="filtro === 'imp'"  (click)="setFiltro('imp')">Importantes ★</button>
+      <button class="chip" [class.on]="filtro === 'done'" (click)="setFiltro('done')">En carrito</button>
+    </div>
 
-  <!-- Chips de filtro -->
-  <div class="chips">
-    <button class="chip" [class.on]="filtro === 'all'"  (click)="setFiltro('all')">Todos</button>
-    <button class="chip" [class.on]="filtro === 'pend'" (click)="setFiltro('pend')">Pendientes</button>
-    <button class="chip" [class.on]="filtro === 'imp'"  (click)="setFiltro('imp')">Importantes ★</button>
-    <button class="chip" [class.on]="filtro === 'done'" (click)="setFiltro('done')">En carrito</button>
   </div>
+  <!-- Fin zona fija -->
 
   <!-- Lista de productos -->
   <div class="lst">
     <div class="lst-inner">
 
-      <!-- Mensaje cuando la lista está vacía -->
       <div *ngIf="itemsFiltrados.length === 0" class="empty">
         <p>No hay productos aquí</p>
         <p>Toca el botón para agregar</p>
       </div>
 
-      <!-- Tarjeta de cada producto -->
       <div *ngFor="let p of itemsFiltrados"
            class="card"
            [class.imp]="p.imp && !p.checked"
            [class.done]="p.checked">
 
-        <!-- Badge importante -->
         <div *ngIf="p.imp && !p.checked" class="imp-badge">★ Importante</div>
 
-        <!-- Checkbox circular -->
         <div class="chk" [class.on]="p.checked" (click)="toggleChecked(p.id)">
           <svg *ngIf="p.checked" class="chk-icon" width="12" height="9">
             <polyline points="1,4.5 4.5,8 11,1" stroke="white" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </div>
 
-        <!-- Emoji de categoría -->
-        <div class="ico">{{ getEmojiModal (p.name) }}</div>
+        <div class="ico">{{ getEmojiModal(p.name) }}</div>
 
-        <!-- Info del producto -->
         <div class="inf">
           <div class="nm" [class.done]="p.checked">{{ p.name }}</div>
           <div class="tags">
             <span class="cat-tag">{{ getNombreCat(p.cat) }}</span>
-            <!-- Cantidad - toque abre editor -->
             <span class="qty-tag"
                   [class.imp]="p.imp && !p.checked"
                   [class.done]="p.checked"
@@ -106,7 +102,6 @@
             </span>
           </div>
 
-          <!-- Editor de cantidad inline -->
           <div *ngIf="p.editing" class="edit-row">
             <input class="qinp" type="number" [(ngModel)]="p.qty" min="1" max="999"/>
             <select class="usel" [(ngModel)]="p.unit">
@@ -122,7 +117,6 @@
           </div>
         </div>
 
-        <!-- Botones derecha: estrella y eliminar -->
         <div class="card-right">
           <button class="star-btn" [class.on]="p.imp" (click)="toggleImportante(p.id)">★</button>
           <button class="del-btn" (click)="eliminarProducto(p.id)">
@@ -139,12 +133,15 @@
 
 </ion-content>
 
-<!-- Botón flotante FUERA del ion-content -->
+<!-- Botón flotante -->
 <div class="fab-wrap">
-  <button class="fab" (click)="abrirModal()">＋ Agregar productos</button>
+  <div class="fab-btns">
+    <button class="fab fab-custom" (click)="abrirModalCustom()">✏️</button>
+    <button class="fab fab-main" (click)="abrirModal()">＋ Agregar productos</button>
+  </div>
 </div>
 
-<!-- Modal de agregar productos -->
+<!-- Modal -->
 <div class="moverlay" *ngIf="modalAbierto" (click)="cerrarModal()">
   <div class="modal" (click)="$event.stopPropagation()">
     <div class="mhandle"></div>
@@ -167,6 +164,53 @@
     <div class="mfoot">
       <button class="mbtn x" (click)="cerrarModal()">Cancelar</button>
       <button class="mbtn ok" (click)="confirmarModal()">Agregar seleccionados</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal producto personalizado -->
+<div class="moverlay" *ngIf="modalCustomAbierto" (click)="cerrarModalCustom()">
+  <div class="modal" (click)="$event.stopPropagation()">
+    <div class="mhandle"></div>
+    <div class="mtitle">Agregar producto personalizado</div>
+
+    <!-- Nombre del producto -->
+    <div class="custom-field">
+      <label class="custom-label">Nombre del producto</label>
+      <input class="custom-input"
+             [(ngModel)]="nuevoProducto.nombre"
+             type="text"
+             placeholder="Ej: Leche de almendras"/>
+    </div>
+
+    <!-- Categoría -->
+    <div class="custom-field">
+      <label class="custom-label">Categoría</label>
+      <select class="custom-select" [(ngModel)]="nuevoProducto.catId">
+        <option value="" disabled>Selecciona una categoría</option>
+        <option *ngFor="let cat of categorias" [value]="cat.id">
+          {{ cat.e }} {{ cat.n }}
+        </option>
+      </select>
+    </div>
+
+    <!-- Emoji -->
+    <div class="custom-field">
+      <label class="custom-label">Emoji (opcional)</label>
+      <input class="custom-input"
+             [(ngModel)]="nuevoProducto.emoji"
+             type="text"
+             placeholder="Ej: 🥛"/>
+    </div>
+
+    <!-- Botones -->
+    <div class="mfoot">
+      <button class="mbtn x" (click)="cerrarModalCustom()">Cancelar</button>
+      <button class="mbtn ok"
+              (click)="confirmarProductoCustom()"
+              [disabled]="!nuevoProducto.nombre || !nuevoProducto.catId">
+        Agregar
+      </button>
     </div>
   </div>
 </div>

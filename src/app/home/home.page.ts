@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { StorageService } from '../core/services/storage.service';
 import { Producto } from '../core/models/producto.model'; 
 import { IonicStorageModule } from '@ionic/storage-angular';
+import { firstValueFrom } from 'rxjs';
 
 const EMOJIS: { [key: string]: string } = {
   'Leche entera': '🥛', 'Leche descremada': '🥛', 'Leche semidescremada': '🥛',
@@ -69,6 +70,55 @@ const EMOJIS: { [key: string]: string } = {
   ],
 })
 export class HomePage implements OnInit, OnDestroy {
+
+  // ── MODAL PRODUCTO PERSONALIZADO ────────────────────────────
+modalCustomAbierto: boolean = false;  // Controla si el modal custom está abierto
+nuevoProducto = {
+  nombre: '',      // Nombre del producto
+  catId: '',       // ID de la categoría seleccionada
+  emoji: ''        // Emoji elegido
+};
+
+// Abre el modal de producto personalizado
+abrirModalCustom() {
+  this.nuevoProducto = { nombre: '', catId: '', emoji: '' };
+  this.modalCustomAbierto = true;
+}
+
+// Cierra el modal de producto personalizado
+cerrarModalCustom() {
+  this.modalCustomAbierto = false;
+  this.nuevoProducto = { nombre: '', catId: '', emoji: '' };
+}
+
+// Agrega el producto personalizado a la lista
+async confirmarProductoCustom() {
+  if (!this.nuevoProducto.nombre.trim()) return; // Nombre obligatorio
+  if (!this.nuevoProducto.catId) return;          // Categoría obligatoria
+  
+  this.items.push({
+    id: this.storageService.generarId(),
+    name: this.nuevoProducto.nombre.trim(),
+    cat: this.nuevoProducto.catId,
+    checked: false,
+    imp: false,
+    qty: 1,
+    unit: 'und',
+    editing: false
+  });
+  await this.guardar();
+
+// Guarda también en el catálogo permanente
+  await this.storageService.guardarProductoCustom(
+    this.nuevoProducto.nombre.trim(),
+    this.nuevoProducto.catId,
+    this.nuevoProducto.emoji
+  );
+
+  // Recarga el catálogo para que aparezca en el modal
+  await this.cargarCatalogo();
+  this.cerrarModalCustom();
+}
 
   // ── DATOS DE LA LISTA ──────────────────────────────────────
 
@@ -133,6 +183,9 @@ getEmojiModal(nombre: string): string {
     this.listaSub = this.storageService.lista$.subscribe(items => {
       this.items = [...items];
     });     // Luego carga la lista guardada del usuario
+  
+    
+
   }
 
   ngOnDestroy() {
@@ -142,14 +195,25 @@ getEmojiModal(nombre: string): string {
   // ── CARGA DE DATOS ──────────────────────────────────────────
 
   // Lee el catalogo.json y guarda las categorías
-  cargarCatalogo() {
-    return new Promise<void>(resolve => {
-      this.http.get<any>('assets/data/catalogo.json').subscribe(data => {
-        this.categorias = data.categorias;
-        resolve();
-      });
-    });
-  }
+  async cargarCatalogo() {
+  // Carga el catálogo JSON
+  const data = await firstValueFrom(this.http.get<any>('assets/data/catalogo.json'));
+  this.categorias = data.categorias;
+
+  // Carga productos personalizados y los agrega a sus categorías
+  const custom = await this.storageService.cargarProductosCustom();
+  custom.forEach((p: any) => {
+    const cat = this.categorias.find((c: any) => c.id === p.catId);
+    if (cat && !cat.productos.includes(p.nombre)) {
+      cat.productos.push(p.nombre);
+    }
+  });
+
+  // Agrega el emoji personalizado al mapa
+  custom.forEach((p: any) => {
+    if (p.emoji) EMOJIS[p.nombre] = p.emoji;
+  });
+}
 
   // Carga la lista guardada en el dispositivo
   async cargarLista() {

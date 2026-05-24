@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { StorageService, } from '../../core/services/storage.service';
 import { Producto } from '../../core/models/producto.model';
+import { firstValueFrom } from 'rxjs';
 
 // Mapa de emojis individuales por producto
 const EMOJIS: { [key: string]: string } = {
@@ -102,14 +103,24 @@ getEmojiProducto(nombre: string): string {
   }
 
   // Lee el catalogo.json y guarda las categorías
-  cargarCatalogo() {
-    return new Promise<void>(resolve => {
-      this.http.get<any>('assets/data/catalogo.json').subscribe(data => {
-        this.categorias = data.categorias;
-        resolve();
-      });
-    });
-  }
+  async cargarCatalogo() {
+  const data = await firstValueFrom(this.http.get<any>('assets/data/catalogo.json'));
+  this.categorias = data.categorias;
+
+  // Carga productos personalizados y los agrega a sus categorías
+  const custom = await this.storageService.cargarProductosCustom();
+  custom.forEach((p: any) => {
+    const cat = this.categorias.find((c: any) => c.id === p.catId);
+    if (cat && !cat.productos.includes(p.nombre)) {
+      cat.productos.push(p.nombre);
+    }
+  });
+
+  // Agrega el emoji personalizado al mapa
+  custom.forEach((p: any) => {
+    if (p.emoji) EMOJIS[p.nombre] = p.emoji;
+  });
+}
 
   // Carga la lista guardada del usuario
   async cargarLista() {

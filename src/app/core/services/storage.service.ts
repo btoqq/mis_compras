@@ -42,4 +42,20 @@ export class StorageService {
   generarId(): string {
     return Date.now().toString(36) + Math.random().toString(36).slice(2);
   }
+
+  private readonly KEY_CUSTOM = 'mis_compras_custom'; // Llave para productos personalizados
+
+// Guarda un producto personalizado en el catálogo
+async guardarProductoCustom(nombre: string, catId: string, emoji: string): Promise<void> {
+  const custom = await this.cargarProductosCustom();
+  custom.push({ nombre, catId, emoji });
+  await this.storage.set(this.KEY_CUSTOM, JSON.stringify(custom));
 }
+
+// Carga todos los productos personalizados
+async cargarProductosCustom(): Promise<any[]> {
+  const data = await this.storage.get(this.KEY_CUSTOM);
+  return data ? JSON.parse(data) : [];
+}
+}
+
